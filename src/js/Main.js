@@ -61,6 +61,7 @@ export class Main extends EventDispatcher
 		this.headGallery.addImage(  './assets/images/work-gallery-image-5.png' );
 		this.headGallery.addImage(  './assets/images/work-gallery-image-6.png' );
 
+		/*
 		this.photoGallery = new CubeGallery( this._cubeView , 9 , 0 , 14000 );
 		this.photoGallery.addImage(  './assets/images/photography-image.png' );
 		this.photoGallery.addImage(  './assets/images/photography-image-1.png' );
@@ -71,7 +72,7 @@ export class Main extends EventDispatcher
 		this.photoGallery.addImage(  './assets/images/photography-image-6.png' );
 		this.photoGallery.addImage(  './assets/images/photography-image-7.png' );
 		this.photoGallery.addImage(  './assets/images/photography-image-8.png' );
-
+		*/
 		this.assetLoader.addEventListener( Event.COMPLETE , ()=>this.onAllImagesLoaded() );
 		this.assetLoader.start();
 
@@ -107,7 +108,7 @@ export class Main extends EventDispatcher
 			aboutText.show( 1 , 1 , false );
 
 		var skillsImage = this.assetLoader.getCubeImage( 'skills' );
-			skillsImage.setImage( 1 , 19 , 0 );
+			skillsImage.setImage( 1 , 9 , 0 );
 			skillsImage.delayFunction = function ( r , c , current , total , delay )
 				{
 					return delay + ( ( c + 1 ) * .1 + ( r + 1 ) * .1 );
@@ -116,7 +117,7 @@ export class Main extends EventDispatcher
 
 		this.headGallery.start();
 		this.headGallery.addEventListener(CubeImageEvent.CLICK, ( e )=>this._onClickHeadGallery( e ));
-		this.photoGallery.start();
+		//this.photoGallery.start();
 
 	}
 	/**

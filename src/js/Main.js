@@ -242,7 +242,7 @@ export class Main extends EventDispatcher
 	_onGalleryAnimationComplete()
 	{
 		this.headGalleryTransitionCounter ++;
-		if ( this.headGalleryTransitionCounter % 2 == 0 )
+		if ( this.headGalleryTransitionCounter % 3 == 0 )
 		{
 			this._wipeFX();
 		}
@@ -253,7 +253,7 @@ export class Main extends EventDispatcher
 	 */
 	_onWipeComplete()
 	{
-		this.headGallery.start();
+		this.headGallery.resume();
 	}
 	/**
 	 *

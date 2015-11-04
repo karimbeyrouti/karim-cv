@@ -1,8 +1,8 @@
 # Karim-CV:
 
-Build with ES6 using Babel, this is a quick and dirty one page website I built in a couple of days to have a little info about me: http://karim.kurst.co.uk/. I am just putting this out here in case it helps anyone for whatever reason. 
+This is a quick and dirty 'about me' web page I made in a couple of days: http://karim.kurst.co.uk/. It is built with ES6, Babel and ThreeJS - for the fun of it. I am just putting this out here in case it helps anyone for whatever reason. 
 
-The code is not really well commented, and there are a few of utility classes I built, used, taken, ported over time in the ./lib folder. 
+The code is not really well commented, there are a few utility classes I built, grabbed or ported over time, these live in the './lib' directory.
 
 # Setup / Compile:
 

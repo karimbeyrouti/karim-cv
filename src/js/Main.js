@@ -166,7 +166,7 @@ export class Main extends EventDispatcher
 	{
 		//this.contactImg.setImage( 1 ,0, this.titleImg.columnCount , true );
 		this.contactImg.show( 2 , 0 , true );
-		document.getElementById('container').style.cursor = "default";
+		document.getElementById('content').style.cursor = "default";
 	}
 	/**
 	 *
@@ -176,7 +176,7 @@ export class Main extends EventDispatcher
 	{
 		//this.contactImg.setImage( 3 ,0, this.titleImg.columnCount , true );
 		this.contactImgOver.show( 2 , 0 , false );
-		document.getElementById('container').style.cursor = "pointer";
+		document.getElementById('content').style.cursor = "pointer";
 
 	}
 	render()

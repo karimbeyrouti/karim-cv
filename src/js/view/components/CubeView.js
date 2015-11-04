@@ -39,7 +39,6 @@ export class CubeView extends EventDispatcher
 		this._meshes = [];
 		this._cubeGeom = new THREE.BoxGeometry( this._cubeWidth, this._cubeHeight, this._cubeHeight, 8 , 8, 8 );
 		this._grid = new Array(this._rows);
-
 		this._mousePicker = new CubeViewMousePicker( threeView , this );
 
 		for ( var r = 0 ; r < this._grid.length ;r ++ )
@@ -339,8 +338,8 @@ export class CubeView extends EventDispatcher
 				var mesh = new THREE.Mesh( this._cubeGeom , new THREE.MultiMaterial ( materialArray ));
 					mesh.position.x = ( c * clipRect.width );
 					mesh.position.y = ( ( this._rows - r ) * clipRect.height );
-					mesh.castShadow = true;
-					mesh.receiveShadow = true;
+					mesh.castShadow = false;
+					mesh.receiveShadow = false;
 					mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.01;
 				this._grid [r][c] = mesh;
 				this._meshes.push( mesh );

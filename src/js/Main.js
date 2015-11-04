@@ -15,6 +15,8 @@ import {CubeImageEvent} from "./view/components/events/CubeImageEvent";
 import {AssetLoader} from './loaders/AssetLoader';
 
 var TweenMax = require( 'gsap/src/uncompressed/TweenMax');
+var OBJLoader = require( './utils/OBJLoader');
+
 
 export class Main extends EventDispatcher
 {
@@ -41,6 +43,8 @@ export class Main extends EventDispatcher
 		this.raf = new RequestAnimationFrame( this.render , this );
 		this.raf.start();
 
+
+
 		this.contactImg = null;
 		this.contactImgOver = null;
 		this.titleImg = null;
@@ -60,6 +64,8 @@ export class Main extends EventDispatcher
 		this.headGallery.addImage(  './assets/images/work-gallery-image-4.png' );
 		this.headGallery.addImage(  './assets/images/work-gallery-image-5.png' );
 		this.headGallery.addImage(  './assets/images/work-gallery-image-6.png' );
+		this.headGalleryTransitionCounter = 0;
+
 
 		/*
 		this.photoGallery = new CubeGallery( this._cubeView , 9 , 0 , 14000 );
@@ -73,8 +79,60 @@ export class Main extends EventDispatcher
 		this.photoGallery.addImage(  './assets/images/photography-image-7.png' );
 		this.photoGallery.addImage(  './assets/images/photography-image-8.png' );
 		*/
-		this.assetLoader.addEventListener( Event.COMPLETE , ()=>this.onAllImagesLoaded() );
+		this.assetLoader.addEventListener( Event.COMPLETE , ()=>this._onAllImagesLoaded() );
 		this.assetLoader.start();
+
+	}
+
+	//--------------------------------------------------------------------
+
+	_loadBackground()
+	{
+
+		var material = new THREE.MeshBasicMaterial( {
+			map: THREE.ImageUtils.loadTexture( './assets/images/background.jpg' ),
+			color:0xffffff
+		} );
+
+		var geometry = new THREE.PlaneGeometry( 1024, 2048, 1 , 2 );
+
+		this.mesh = new THREE.Mesh( geometry , material );
+		this.mesh.position.z = 50;
+		this._threeView.add( this.mesh );
+
+	}
+	/**
+	 *
+	 * @private
+	 */
+	_wipeFX()
+	{
+
+		this.headGallery.pause();
+
+		var rl = this._cubeView.rows;
+		var cl = this._cubeView.columns;
+		var cube;
+		var delay;
+		var s = .01;
+		var delayMult = 0.1;
+		var onComplete = null;
+
+		for ( var c = 0 ; c < cl ; c ++ )
+		{
+			for ( var r = 0 ; r < rl ; r ++ )
+			{
+
+				if ( r == rl - 1 && c == cl - 1 )
+					onComplete = ()=>this._onWipeComplete();
+
+				cube    = this._cubeView.getCube( r , c );
+				delay   = ( ( c + 1 ) * delayMult + ( r + 1 ) * delayMult );
+				TweenMax.to( cube.scale, 1 , {z:s, y:s, x:s,delay:delay});
+				TweenMax.to( cube.scale, 1 , {z:1, y:1, x:1,delay:.8 + delay});
+				TweenMax.to( cube.rotation, 2 , { y:cube.rotation.y + Math.PI *2 ,delay:delay , onComplete:onComplete});
+			}
+		}
 
 	}
 
@@ -83,7 +141,7 @@ export class Main extends EventDispatcher
 	/**
 	 *
 	 */
-	onAllImagesLoaded()
+	_onAllImagesLoaded()
 	{
 		this.titleImg = this.assetLoader.getCubeImage( 'header-title' );
 		this.titleImg.setImage( 1 , 0 , 0 );
@@ -114,11 +172,13 @@ export class Main extends EventDispatcher
 					return delay + ( ( c + 1 ) * .1 + ( r + 1 ) * .1 );
 				};
 			skillsImage.show( 1 , 1 , true );
+			skillsImage.addEventListener(CubeImageEvent.ANIMATION_COMPLETE, ( e )=>this._onPageAnimationComplete( e ));
 
 		this.headGallery.start();
 		this.headGallery.addEventListener(CubeImageEvent.CLICK, ( e )=>this._onClickHeadGallery( e ));
-		//this.photoGallery.start();
+		this.headGallery.addEventListener(CubeImageEvent.ANIMATION_COMPLETE, ( e )=>this._onGalleryAnimationComplete( e ));
 
+		this._cubeView.show( 1 , skillsImage.rowCount + skillsImage.row  , 0 , this._cubeView.rows, this._cubeView.columns , 1 , false , 0)
 	}
 	/**
 	 *
@@ -127,7 +187,8 @@ export class Main extends EventDispatcher
 	 */
 	_onClickHeadGallery( e )
 	{
-		this.headGallery.showNext();
+		if ( ! this.headGallery.isPaused )
+			this.headGallery.showNext();
 	}
 	/**
 	 *
@@ -135,8 +196,6 @@ export class Main extends EventDispatcher
 	 */
 	_onClickContactImage( e )
 	{
-		console.log( e , e.row , e.column ) ;
-		//window.location.href = "mailto:karim@kurst.co.uk?subject=Hello%20Karim";
 		window.location.href = "tel:07977997629";
 
 		switch ( e.column )
@@ -165,7 +224,6 @@ export class Main extends EventDispatcher
 	 */
 	_onRollOutContactImage()
 	{
-		//this.contactImg.setImage( 1 ,0, this.titleImg.columnCount , true );
 		this.contactImg.show( 2 , 0 , true );
 		document.getElementById('content').style.cursor = "default";
 	}
@@ -175,14 +233,44 @@ export class Main extends EventDispatcher
 	 */
 	_onRollOverContactImage()
 	{
-		//this.contactImg.setImage( 3 ,0, this.titleImg.columnCount , true );
 		this.contactImgOver.show( 2 , 0 , false );
 		document.getElementById('content').style.cursor = "pointer";
+	}
+	/**
+	 *
+	 */
+	_onGalleryAnimationComplete()
+	{
+		this.headGalleryTransitionCounter ++;
+		if ( this.headGalleryTransitionCounter % 2 == 0 )
+		{
+			this._wipeFX();
+		}
 
 	}
+	/**
+	 *
+	 */
+	_onWipeComplete()
+	{
+		this.headGallery.start();
+	}
+	/**
+	 *
+	 * @private
+	 */
+	_onPageAnimationComplete()
+	{
+		//this._threeView.renderer.setClearColor(0x000000, 1);
+		this._loadBackground();
+	}
+	/**
+	 *
+	 */
 	render()
 	{
 		this._threeView.render();
+		//this.mesh.rotation.y += .01;
 	}
 
 }

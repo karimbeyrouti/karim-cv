@@ -12,6 +12,7 @@ import {NumberUtils} from '../../../../lib/kurst/utils/NumberUtils';
 import {Color} from '../../../../lib/kurst/geom/Color';
 import {CubeImage} from './data/CubeImage';
 import {CubeBase} from './core/CubeBase';
+import {CubeImageEvent} from './events/CubeImageEvent';
 
 var TweenMax = require( 'gsap/src/uncompressed/TweenMax');
 
@@ -33,10 +34,22 @@ export class CubeGallery extends CubeBase
 		this._currentImage = null;
 		this._intervalID = null;
 		this._backwards = false;
+		this._paused = false;
 	}
 
 	//---------------------------------------------------------------------------
 
+	pause()
+	{
+		this._paused = true;
+		this._stopTimeout();
+	}
+
+	resume()
+	{
+		this._paused = false;
+		this._startTimeout();
+	}
 	/**
 	 *
 	 * @param imageID
@@ -56,7 +69,8 @@ export class CubeGallery extends CubeBase
 		this._currentImage.setImage(this._currentSide ,this._row, this._column , true );
 		this._currentImage.show( 2  , 0 , this._backwards );
 
-		this._startTimeout();
+		if ( ! this._paused )
+			this._startTimeout();
 	}
 	/**
 	 *
@@ -87,7 +101,14 @@ export class CubeGallery extends CubeBase
 	{
 		this._assetLoader.start( );
 	}
-
+	/**
+	 *
+	 * @returns {boolean}
+	 */
+	get paused()
+	{
+		return this._paused;
+	}
 	//---------------------------------------------------------------------------
 
 	/**
@@ -132,6 +153,9 @@ export class CubeGallery extends CubeBase
 	{
 		this._loadedImages.push( e.image );
 
+		e.image.addEventListener( CubeImageEvent.ANIMATION_COMPLETE , ()=>this._animationComplete() );
+
+
 		e.image.delayFunction = function ( r , c , current , total , delay )
 		{
 			return delay + ( ( c + 1 ) * .1 + ( r + 1 ) * .1 );
@@ -146,7 +170,9 @@ export class CubeGallery extends CubeBase
 			this._currentImage.show( 1, .5 );
 
 			super.setDimensions( this._row, this._column, this._currentImage.rowCount , this._currentImage.columnCount  );
-			this._startTimeout();
+
+			if ( ! this._paused )
+				this._startTimeout();
 		}
 		else {}
 	}
@@ -158,6 +184,14 @@ export class CubeGallery extends CubeBase
 	_onMakeImageCache( image )
 	{
 		image.setImage( this._currentSide ,this._row, this._column , true , true ); // generate image cache
+	}
+	/**
+	 *
+	 * @private
+	 */
+	_animationComplete()
+	{
+		this.dispatchEvent( new CubeImageEvent( CubeImageEvent.ANIMATION_COMPLETE));
 	}
 
 }

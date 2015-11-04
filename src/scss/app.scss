@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #000;
+  background-color: #FFFFFF;
+  font-family:Monospace;
+  font-size:13px;
+  font-weight: bold;
+  margin: 0px;
+}
+
+canvas {
+  display: block;
+}
+
+.container {
+  position: absolute;
+  background-size: cover;
+  zoom: 1;
+  width: 1024px;
+  height: 2048px;
+  top: 0%;
+  left: 50%;
+  margin-top:0;
+  margin-left: -512px;
+  box-shadow: 2px 2px 10px #dfdfdf;
+}
+
+
+.noWebGL {
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:1024px;
+  height:2048px;
+  visibility: hidden;
+}
+
+.header-title {
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:768px;
+  height:64px;
+}
+
+.github {
+  position:absolute;
+  left:768px;
+  top:0px;
+  width:64px;
+  height:64px;
+}
+
+.linkedin {
+  position:absolute;
+  left:832px;
+  top:0px;
+  width:64px;
+  height:64px;
+}
+
+.email {
+  position:absolute;
+  left:896px;
+  top:0px;
+  width:64px;
+  height:64px;
+}
+
+.telephone {
+  position:absolute;
+  left:960px;
+  top:0px;
+  width:64px;
+  height:64px;
+}
+
+.work-gallery-image {
+  position:absolute;
+  left:0px;
+  top:64px;
+  width:1024px;
+  height:384px;
+}
+
+.about-text {
+  position:absolute;
+  left:0px;
+  top:448px;
+  width:1024px;
+  height:128px;
+}
+
+.photography-image {
+  position:absolute;
+  left:0px;
+  top:576px;
+  width:1024px;
+  height:640px;
+}
+
+.skills {
+  position:absolute;
+  left:0px;
+  top:1216px;
+  width:1024px;
+  height:832px;
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)  {
+
+  @viewport {
+    width: 2024px;
+    min-zoom: 1;
+    max-zoom: 1;
+    orientation: landscape;
+  }
+
+
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 2) {
+
+  body
+  {
+    zoom: 1.5;
+  }
+  @viewport {
+    zoom: 2;
+  }
+
+}
+
+
+@media (max-width: 1024px) {
+
+
+}

@@ -1,0 +1,38 @@
+{
+  "name": "karim-beyrout-cv",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "author": "kurst.co.uk <karim@kurst.co.uk>",
+  "license": "MIT",
+  "main":"src/js/app.js",
+  "browserify": {
+    "transform": ["babelify"]
+  },
+  "devDependencies": {
+    "babelify": "^6.0.2",
+    "browser-sync": "^2.2.3",
+    "browserify": "^9.0.8",
+    "gulp": "^3.8.11",
+    "gulp-changed": "^1.2.1",
+    "gulp-minify-html": "^1.0.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-streamify": "0.0.5",
+    "gulp-typescript": "^2.6.0",
+    "gulp-uglify": "^1.1.0",
+    "gulp-watch": "^4.2.4",
+    "main-bower-files": "^2.7.0",
+    "minimist": "^1.1.1",
+    "stringify": "^3.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.1.0"
+  },
+  "dependencies": {
+    "three": "0.72.0",
+    "gsap":"1.18.0"
+  }
+}

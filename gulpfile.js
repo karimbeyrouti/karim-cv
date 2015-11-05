@@ -62,8 +62,9 @@ var getBrowserifyBundler = (function () {
                     destpath + 'src/js/'
                 ]
             });
+
             bfy.plugin('stringify', ['json','fs','vs']);
-            bfy = bfy.transform(babelify);
+            bfy.transform("babelify", {presets: [ "es2015"],"plugins": ["transform-class-properties"]});
             bundler = bfy;
         }
         return bundler;

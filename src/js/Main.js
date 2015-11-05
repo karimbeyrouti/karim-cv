@@ -261,7 +261,6 @@ export class Main extends EventDispatcher
 	 */
 	_onPageAnimationComplete()
 	{
-		//this._threeView.renderer.setClearColor(0x000000, 1);
 		this._loadBackground();
 	}
 	/**
@@ -270,7 +269,6 @@ export class Main extends EventDispatcher
 	render()
 	{
 		this._threeView.render();
-		//this.mesh.rotation.y += .01;
 	}
 
 }

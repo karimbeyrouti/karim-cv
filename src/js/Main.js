@@ -43,8 +43,6 @@ export class Main extends EventDispatcher
 		this.raf = new RequestAnimationFrame( this.render , this );
 		this.raf.start();
 
-
-
 		this.contactImg = null;
 		this.contactImgOver = null;
 		this.titleImg = null;
@@ -66,19 +64,6 @@ export class Main extends EventDispatcher
 		this.headGallery.addImage(  './assets/images/work-gallery-image-6.png' );
 		this.headGalleryTransitionCounter = 0;
 
-
-		/*
-		this.photoGallery = new CubeGallery( this._cubeView , 9 , 0 , 14000 );
-		this.photoGallery.addImage(  './assets/images/photography-image.png' );
-		this.photoGallery.addImage(  './assets/images/photography-image-1.png' );
-		this.photoGallery.addImage(  './assets/images/photography-image-2.png' );
-		this.photoGallery.addImage(  './assets/images/photography-image-3.png' );
-		this.photoGallery.addImage(  './assets/images/photography-image-4.png' );
-		this.photoGallery.addImage(  './assets/images/photography-image-5.png' );
-		this.photoGallery.addImage(  './assets/images/photography-image-6.png' );
-		this.photoGallery.addImage(  './assets/images/photography-image-7.png' );
-		this.photoGallery.addImage(  './assets/images/photography-image-8.png' );
-		*/
 		this.assetLoader.addEventListener( Event.COMPLETE , ()=>this._onAllImagesLoaded() );
 		this.assetLoader.start();
 

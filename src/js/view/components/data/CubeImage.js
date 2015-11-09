@@ -44,13 +44,14 @@ export class CubeImage extends CubeBase
 	 * @param time
 	 * @param delay
 	 * @param animateBackwards
+	 * @param animationFunction
 	 */
-	show( time = 1 , delay = 0 , animateBackwards = false )
+	show( time = 1 , delay = 0 , animateBackwards = false , animationFunction = undefined )
 	{
 		var endRow = this._row  + ( this._image.height / this._cubeView.cubeHeight );
 		var endCol = this._column + ( this._image.width/ this._cubeView.cubeWidth );
 
-		this._cubeView.show( this._side , this._row , this._column , endRow , endCol , time , animateBackwards , delay , this._delayFunction ,  ()=>this._onAnimationComplete() );
+		this._cubeView.show( this._side , this._row , this._column , endRow , endCol , time , animateBackwards , delay , this._delayFunction ,  ()=>this._onAnimationComplete() , animationFunction );
 	}
 
 	//---------------------------------------------------------------------------

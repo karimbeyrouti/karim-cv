@@ -69,7 +69,9 @@ export class CubeGallery extends CubeBase
 		{
 			TweenMax.killTweensOf( cube.rotation );
 			TweenMax.to( cube.rotation, time , {onComplete:callback  , y: angle , delay: delay} );
-			TweenMax.to( cube.scale, time / 2  , {x:.25,y:.25,z:.25, delay: delay } );
+
+			var s = NumberUtils.random(.1 , 1 );
+			TweenMax.to( cube.scale, time / 2  , {x:s,y:s,z:s, delay: delay } );
 			TweenMax.to( cube.scale, time / 2  , {x:1,y:1,z:1, delay: delay + ( time / 2) } );
 		};
 

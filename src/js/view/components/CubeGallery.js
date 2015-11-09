@@ -64,10 +64,19 @@ export class CubeGallery extends CubeBase
 		if( this._currentSide > 3 )
 			this._currentSide = 0;
 
+
+		var animationFunction = function ( cube , time , delay , angle , callback )
+		{
+			TweenMax.killTweensOf( cube.rotation );
+			TweenMax.to( cube.rotation, time , {onComplete:callback  , y: angle , delay: delay} );
+			TweenMax.to( cube.scale, time / 2  , {x:.25,y:.25,z:.25, delay: delay } );
+			TweenMax.to( cube.scale, time / 2  , {x:1,y:1,z:1, delay: delay + ( time / 2) } );
+		};
+
 		this._currentImage = cubeImage;
 		this._backwards = !this._backwards;
 		this._currentImage.setImage(this._currentSide ,this._row, this._column , true );
-		this._currentImage.show( 2  , 0 , this._backwards );
+		this._currentImage.show( 2  , 0 , this._backwards , NumberUtils.flipCoin() ? animationFunction : undefined );
 
 		if ( ! this._paused )
 			this._startTimeout();

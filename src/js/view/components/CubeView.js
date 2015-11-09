@@ -155,18 +155,19 @@ export class CubeView extends EventDispatcher
 	}
 	/**
 	 *
-	 * @param side
-	 * @param startRow
-	 * @param startCol
-	 * @param endRow
-	 * @param endCol
-	 * @param time
-	 * @param animateBackwards
-	 * @param delayTime
-	 * @param delayFunction
-	 * @param callback
+	 * @param side : Int
+	 * @param startRow : Int
+	 * @param startCol : Int
+	 * @param endRow : Int
+	 * @param endCol : Int
+	 * @param time : Number
+	 * @param animateBackwards : Boolean
+	 * @param delayTime : Number
+	 * @param delayFunction : ( row , column , currentTile , totalTiles , delayTime ) => ( row , column , currentTile , totalTiles , delayTime )
+	 * @param callback : Function
+	 * @param animationFunction : (  cube , time , delay , angle , callback ) => ( cube , time , delay , angle , callback )
 	 */
-	show( side , startRow = 0 , startCol = 0 , endRow = 32 , endCol = 16 , time = .5 ,  animateBackwards = false , delayTime = 0 , delayFunction = undefined , callback = undefined )
+	show( side , startRow = 0 , startCol = 0 , endRow = 32 , endCol = 16 , time = .5 ,  animateBackwards = false , delayTime = 0 , delayFunction = undefined , callback = undefined , animationFunction = undefined )
 	{
 
 		var cube;
@@ -176,6 +177,23 @@ export class CubeView extends EventDispatcher
 
 		var r;
 		var c;
+		var angle = side * ( Math.PI / 2 );
+
+		if ( animationFunction === undefined )
+		{
+			animationFunction = function ( cube , time , delay , angle , callback )
+			{
+				TweenMax.killTweensOf( cube.rotation );
+				TweenMax.to( cube.rotation, time , {onComplete:callback  , y: angle , delay: delay} );
+
+				if ( ! cube.scaleInited )
+				{
+					TweenMax.to( cube.scale, 1 , {x:1,y:1,z:1, delay: ( delay - 0.1 ) } );
+					cube.scaleInited = true;
+				}
+
+			}
+		}
 
 		if ( animateBackwards )
 		{
@@ -184,23 +202,11 @@ export class CubeView extends EventDispatcher
 				for ( c = endCol - 1; c >= startCol ; c-- )
 				{
 					cube = this.getCube( r , c );
-					TweenMax.killTweensOf( cube.rotation );
+
 					if ( delayFunction != undefined )
-					{
 						calcDelay = delayFunction( r , c , current ++ , total , delayTime );
-					}
 
-					if ( r == endRow - 1 && c == endCol - 1 )
-					{
-						TweenMax.to( cube.rotation, time , {onComplete: callback , y: side * ( Math.PI / 2 ) , delay: calcDelay} );
-					}
-					else
-					{
-						TweenMax.to( cube.rotation, time , {y: side * ( Math.PI / 2 ) , delay: calcDelay } );// + ( ( c + 1 ) * .025 + ( r + 1 ) * .025 ) } );
-					}
-
-					if ( ! cube.scaleInited )
-						TweenMax.to( cube.scale, time , {x:1,y:1,z:1, delay: ( calcDelay - 0.1 ) } );
+					animationFunction( cube , time , calcDelay , angle , ( r == endRow - 1 && c == endCol - 1 ) ? callback : undefined );
 
 				}
 			}
@@ -212,24 +218,12 @@ export class CubeView extends EventDispatcher
 				for ( c = startCol ; c < endCol  ; c++ )
 				{
 					cube = this.getCube( r , c );
-					TweenMax.killTweensOf( cube.rotation );
 
 					if ( delayFunction != undefined )
-					{
 						calcDelay = delayFunction( r , c , current ++ , total , delayTime );
-					}
 
-					if ( r == endRow - 1 && c == endCol - 1 )
-					{
-						TweenMax.to( cube.rotation, time , {onComplete: callback , y: side * ( Math.PI / 2 ) , delay: calcDelay} );// + ( ( c + 1 ) * .025 + ( r + 1 ) * .025 ) } );
-					}
-					else
-					{
-						TweenMax.to( cube.rotation, time , {y: side * ( Math.PI / 2 ) , delay: calcDelay } );// + ( ( c + 1 ) * .025 + ( r + 1 ) * .025 ) } );
-					}
+					animationFunction( cube , time , calcDelay , angle , ( r == endRow - 1 && c == endCol - 1 ) ? callback : undefined );
 
-					if ( ! cube.scaleInited )
-						TweenMax.to( cube.scale, 1 , {x:1,y:1,z:1, delay: ( calcDelay - 0.1 ) } );
 				}
 			}
 		}

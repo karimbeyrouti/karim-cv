@@ -5,7 +5,7 @@ import {EventDispatcher} from '../../../../../lib/kurst/events/EventDispatcher';
 import {BitmapData} from '../../../../../lib/kurst/display/BitmapData';
 
 /**
- * Image comprised of cubes / side of a cube
+ * Image comprised of cubes on one side of a cube
  */
 export class CubeImage extends CubeBase
 {
@@ -121,6 +121,7 @@ export class CubeImage extends CubeBase
 
 	/**
 	 * Animation complete event handler
+	 *
 	 * @private
 	 */
 	_onAnimationComplete()

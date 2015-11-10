@@ -18,7 +18,7 @@ var TweenMax = require( 'gsap/src/uncompressed/TweenMax');
 var OBJLoader = require( '../utils/OBJLoader');
 
 /**
- * Application controller - most UI items are here - this is a very simple site
+ * Application controller - controller for all UI - this is a very simple site
  */
 export class AppController extends EventDispatcher
 {

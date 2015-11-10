@@ -44,6 +44,7 @@ export class CubeViewMousePicker extends EventDispatcher
 	//---------------------------------------------------------------------------
 
 	/**
+	 * remove a mouse event
 	 *
 	 * @param cubeImage
 	 */
@@ -66,6 +67,7 @@ export class CubeViewMousePicker extends EventDispatcher
 		}
 	}
 	/**
+	 * register a mouse event
 	 *
 	 * @param cubeImage
 	 */
@@ -82,6 +84,7 @@ export class CubeViewMousePicker extends EventDispatcher
 		}
 	}
 	/**
+	 * Is an event registered to a cube image
 	 *
 	 * @param cubeImage
 	 * @returns {boolean}
@@ -108,6 +111,12 @@ export class CubeViewMousePicker extends EventDispatcher
 
 	//---------------------------------------------------------------------------
 
+	/**
+	 *
+	 * @param row
+	 * @param col
+	 * @private
+	 */
 	_onRollOut( row , col )
 	{
 		//if ( row != -1 && col != -1 )
@@ -151,6 +160,12 @@ export class CubeViewMousePicker extends EventDispatcher
 		//}
 	}
 
+	/**
+	 *
+	 * @param row
+	 * @param col
+	 * @private
+	 */
 	_onRollOver( row , col )
 	{
 		if ( row != -1 && col != -1 )
@@ -184,6 +199,10 @@ export class CubeViewMousePicker extends EventDispatcher
 		}
 	}
 
+	/**
+	 *
+	 * @private
+	 */
 	_initMouseHandlers()
 	{
 		this._threeView.renderer.domElement.addEventListener( 'mouseover' , ()=>this._onMouseOver());
@@ -191,6 +210,10 @@ export class CubeViewMousePicker extends EventDispatcher
 		this._threeView.renderer.domElement.addEventListener( 'click' , ()=>this._onMouseClick());
 	}
 
+	/**
+	 *
+	 * @private
+	 */
 	_onMouseClick()
 	{
 		if ( this.currentCol != -1 && this.currentRow != -1 )
@@ -222,6 +245,10 @@ export class CubeViewMousePicker extends EventDispatcher
 		}
 	}
 
+	/**
+	 *
+	 * @private
+	 */
 	_onMouseOut()
 	{
 		this._threeView.renderer.domElement.removeEventListener( 'mousemove' , this._mouseMoveDelegate );
@@ -233,11 +260,20 @@ export class CubeViewMousePicker extends EventDispatcher
 
 	}
 
+	/**
+	 *
+	 * @private
+	 */
 	_onMouseOver()
 	{
 		this._threeView.renderer.domElement.addEventListener( 'mousemove' , this._mouseMoveDelegate );
 	}
 
+	/**
+	 *
+	 * @param e
+	 * @private
+	 */
 	_onMouseMove( e )
 	{
 		this.mousePosition.x = e.layerX ;//( ( e.layerX  ) / this.width ) * 2 - 1;

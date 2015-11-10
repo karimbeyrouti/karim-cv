@@ -1,3 +1,6 @@
+/**
+ * Load Item Value Object
+ */
 export class LoadItemVO {
 
 	constructor()

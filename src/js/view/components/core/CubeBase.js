@@ -4,7 +4,7 @@ import {EventDispatcher} from '../../../../../lib/kurst/events/EventDispatcher';
 import {BitmapData} from '../../../../../lib/kurst/display/BitmapData';
 
 /**
- * Base class for a cube collection
+ * Base class for a collection of cubes that make an image
  */
 export class CubeBase extends EventDispatcher
 {
@@ -23,6 +23,7 @@ export class CubeBase extends EventDispatcher
 
 	/**
 	 * Set size / dimensions for a cube collection
+	 *
 	 * @param row
 	 * @param column
 	 * @param rowCount
@@ -55,6 +56,7 @@ export class CubeBase extends EventDispatcher
 	}
 	/**
 	 * get start row of cube collection
+	 *
 	 * @returns {number|*}
 	 */
 	get row()
@@ -63,6 +65,7 @@ export class CubeBase extends EventDispatcher
 	}
 	/**
 	 * get number of rows
+	 *
 	 * @returns {number}
 	 */
 	get rowCount()
@@ -71,6 +74,7 @@ export class CubeBase extends EventDispatcher
 	}
 	/**
 	 * Override - addEventListener - because we have custom event registration for mouse event
+	 *
 	 * @param type
 	 * @param listener
 	 * @param scope
@@ -89,6 +93,7 @@ export class CubeBase extends EventDispatcher
 	}
 	/**
 	 * Override - removeEventListener - because we have custom event registration for mouse event
+	 *
 	 * @param type
 	 * @param listener
 	 * @param scope

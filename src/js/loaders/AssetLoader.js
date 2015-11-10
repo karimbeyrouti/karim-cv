@@ -6,7 +6,7 @@ import {EventDispatcher} from '../../../lib/kurst/events/EventDispatcher';
 import {LoadItemVO} from './data/LoadItemVO';
 
 /**
- * Asset loader for images and brushes
+ * Asset loader for images / cube images
  */
 export class AssetLoader extends EventDispatcher {
 	//------------------------------------------------------------

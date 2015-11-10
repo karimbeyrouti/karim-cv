@@ -6,7 +6,7 @@ export class Main
 	constructor()
 	{
 		if ( this.hasWebGL() )
-		this._appController = new AppController();
+			this._appController = new AppController();
 	}
 	/**
 	 *

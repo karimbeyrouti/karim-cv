@@ -4,7 +4,7 @@ import {EventDispatcher} from '../../../../../lib/kurst/events/EventDispatcher';
 import {BitmapData} from '../../../../../lib/kurst/display/BitmapData';
 
 /**
- * Base class for a cube
+ * Base class for a cube collection
  */
 export class CubeBase extends EventDispatcher
 {

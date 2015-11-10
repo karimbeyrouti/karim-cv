@@ -15,7 +15,9 @@ import {CubeBase} from './core/CubeBase';
 import {CubeImageEvent} from './events/CubeImageEvent';
 
 var TweenMax = require( 'gsap/src/uncompressed/TweenMax');
-
+/**
+ * Image gallery made out of cubes
+ */
 export class CubeGallery extends CubeBase
 {
 	constructor( cubeView , startRow , startCol , intervalTime = 10000 )
@@ -39,19 +41,24 @@ export class CubeGallery extends CubeBase
 
 	//---------------------------------------------------------------------------
 
+	/**
+	 * Pause the image gallery
+	 */
 	pause()
 	{
 		this._paused = true;
 		this._stopTimeout();
 	}
-
+	/**
+	 * resume the image gallery
+	 */
 	resume()
 	{
 		this._paused = false;
 		this._startTimeout();
 	}
 	/**
-	 *
+	 * show a (loaded) image in the gallery
 	 * @param imageID
 	 */
 	showImage( imageID )
@@ -63,7 +70,6 @@ export class CubeGallery extends CubeBase
 
 		if( this._currentSide > 3 )
 			this._currentSide = 0;
-
 
 		var animationFunction = function ( cube , time , delay , angle , callback )
 		{
@@ -84,7 +90,7 @@ export class CubeGallery extends CubeBase
 			this._startTimeout();
 	}
 	/**
-	 *
+	 * Show next image in gallery images
 	 */
 	showNext()
 	{
@@ -98,6 +104,7 @@ export class CubeGallery extends CubeBase
 
 	}
 	/**
+	 * add an image to be loaded by the gallery
 	 *
 	 * @param url
 	 */
@@ -106,13 +113,14 @@ export class CubeGallery extends CubeBase
 		this._assetLoader.queueCubeImage( url , this._counter++ );
 	}
 	/**
-	 *
+	 * Start the gallery ( and load images )
 	 */
 	start()
 	{
 		this._assetLoader.start( );
 	}
 	/**
+	 * Getter - is gallery paused
 	 *
 	 * @returns {boolean}
 	 */
@@ -123,7 +131,7 @@ export class CubeGallery extends CubeBase
 	//---------------------------------------------------------------------------
 
 	/**
-	 *
+	 * Start the image timeout
 	 * @private
 	 */
 	_startTimeout()
@@ -132,7 +140,7 @@ export class CubeGallery extends CubeBase
 		this._intervalID = setInterval( ()=>this._timeout() , this._intervalTime );
 	}
 	/**
-	 *
+	 * Image timeout
 	 * @private
 	 */
 	_timeout()
@@ -148,6 +156,7 @@ export class CubeGallery extends CubeBase
 
 	}
 	/**
+	 * Stop the image timeout
 	 *
 	 * @private
 	 */
@@ -156,6 +165,7 @@ export class CubeGallery extends CubeBase
 		clearInterval( this._intervalID );
 	}
 	/**
+	 * Image loaded event handler
 	 *
 	 * @param e
 	 * @private
@@ -188,6 +198,7 @@ export class CubeGallery extends CubeBase
 		else {}
 	}
 	/**
+	 * Make an image cache - speeds up future transitions
 	 *
 	 * @param image
 	 * @private
@@ -197,7 +208,7 @@ export class CubeGallery extends CubeBase
 		image.setImage( this._currentSide ,this._row, this._column , true , true ); // generate image cache
 	}
 	/**
-	 *
+	 * Image animation complete
 	 * @private
 	 */
 	_animationComplete()

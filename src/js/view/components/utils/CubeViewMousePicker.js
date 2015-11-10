@@ -7,6 +7,9 @@ import {CubeImageEvent} from '../events/CubeImageEvent';
 
 var TweenMax = require( 'gsap/src/uncompressed/TweenMax');
 
+/**
+ * Mouse picker for the cube view
+ */
 export class CubeViewMousePicker extends EventDispatcher
 {
 

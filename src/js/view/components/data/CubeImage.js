@@ -4,6 +4,9 @@ import {CubeBase} from "../core/CubeBase";
 import {EventDispatcher} from '../../../../../lib/kurst/events/EventDispatcher';
 import {BitmapData} from '../../../../../lib/kurst/display/BitmapData';
 
+/**
+ * Image comprised of cubes / side of a cube
+ */
 export class CubeImage extends CubeBase
 {
 	constructor( cubeView )

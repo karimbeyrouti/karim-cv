@@ -17,6 +17,9 @@ import {AssetLoader} from './../loaders/AssetLoader';
 var TweenMax = require( 'gsap/src/uncompressed/TweenMax');
 var OBJLoader = require( '../utils/OBJLoader');
 
+/**
+ * Application controller - most UI items are here - this is a very simple site
+ */
 export class AppController extends EventDispatcher
 {
 	constructor()
@@ -61,7 +64,7 @@ export class AppController extends EventDispatcher
 	//--------------------------------------------------------------------
 
 	/**
-	 *
+	 * Render loop
 	 */
 	render()
 	{
@@ -71,6 +74,7 @@ export class AppController extends EventDispatcher
 	//--------------------------------------------------------------------
 
 	/**
+	 * Load the a background image which is behind the cube view
 	 *
 	 * @private
 	 */
@@ -90,6 +94,7 @@ export class AppController extends EventDispatcher
 
 	}
 	/**
+	 * Cube wipe effect - little effect which animates a wave over all cubes on screen
 	 *
 	 * @private
 	 */
@@ -127,6 +132,7 @@ export class AppController extends EventDispatcher
 	//--------------------------------------------------------------------
 
 	/**
+	 * Event - all images loaded
 	 *
 	 * @private
 	 */
@@ -170,8 +176,9 @@ export class AppController extends EventDispatcher
 		this._cubeView.show( 1 , this._skillsImage.rowCount + this._skillsImage.row  , 0 , this._cubeView.rows, this._cubeView.columns , 1 , false , 0)
 	}
 	/**
+	 * Event - clicking on head gallery
 	 *
-	 * @param e
+	 * @param e : Event
 	 * @private
 	 */
 	_onClickHeadGallery( e )
@@ -180,7 +187,9 @@ export class AppController extends EventDispatcher
 			this._headGallery.showNext();
 	}
 	/**
+	 * Click on contact image
 	 *
+	 * @param e : CubeImageEvent
 	 * @private
 	 */
 	_onClickContactImage( e )
@@ -206,7 +215,7 @@ export class AppController extends EventDispatcher
 		}
 	}
 	/**
-	 *
+	 * Roll out of contact image
 	 * @private
 	 */
 	_onRollOutContactImage()
@@ -215,7 +224,7 @@ export class AppController extends EventDispatcher
 		document.getElementById('content').style.cursor = "default";
 	}
 	/**
-	 *
+	 * Roll over contact image
 	 * @private
 	 */
 	_onRollOverContactImage()
@@ -224,6 +233,7 @@ export class AppController extends EventDispatcher
 		document.getElementById('content').style.cursor = "pointer";
 	}
 	/**
+	 * Gallery image transition complete event
 	 *
 	 * @private
 	 */
@@ -237,6 +247,7 @@ export class AppController extends EventDispatcher
 
 	}
 	/**
+	 * Wipe / wave effect transition complete
 	 *
 	 * @private
 	 */
@@ -245,7 +256,7 @@ export class AppController extends EventDispatcher
 		this._headGallery.resume();
 	}
 	/**
-	 *
+	 * Page animation comeplete event
 	 * @private
 	 */
 	_onPageAnimationComplete()

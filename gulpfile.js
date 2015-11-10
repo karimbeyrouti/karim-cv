@@ -78,6 +78,7 @@ var bundle = function() {
         .pipe(source('app.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
+        .pipe(uglify())
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(destpath + 'dist/js'))
         .pipe(browserSync.reload({ stream: true }));

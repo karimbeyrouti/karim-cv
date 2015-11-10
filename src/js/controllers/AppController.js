@@ -185,8 +185,6 @@ export class AppController extends EventDispatcher
 	 */
 	_onClickContactImage( e )
 	{
-		window.location.href = "tel:07977997629";
-
 		switch ( e.column )
 		{
 			case 0:

@@ -30,11 +30,12 @@ export class CubeImage extends CubeBase
 	//---------------------------------------------------------------------------
 
 	/**
+	 * Assign an image to a specified side in a group of cubes
 	 *
-	 * @param side
-	 * @param startRow
-	 * @param startCol
-	 * @param useCache
+	 * @param side - 0 to 3 - side to add the image to
+	 * @param startRow - start row for image
+	 * @param startCol - start column for the image
+	 * @param useCache - cache the image ( speeds up future transitions )
 	 */
 	setImage( side , startRow , startCol , useCache = false )
 	{
@@ -43,11 +44,12 @@ export class CubeImage extends CubeBase
 		this._cubeView.setImage( this.bitmap , this._textureSide[side] , 0xffffff , startRow , startCol , useCache );
 	}
 	/**
-	 *
-	 * @param time
-	 * @param delay
-	 * @param animateBackwards
-	 * @param animationFunction
+	 * Show the image
+	 * @param time - animation time
+	 * @param delay - animation delay time
+	 * @param animateBackwards - animate backwards
+	 * @param animationFunction - animation function
+	 *          animationFunction : (  cube , time , delay , angle , callback ) => ( cube , time , delay , angle , callback )
 	 */
 	show( time = 1 , delay = 0 , animateBackwards = false , animationFunction = undefined )
 	{
@@ -60,14 +62,17 @@ export class CubeImage extends CubeBase
 	//---------------------------------------------------------------------------
 
 	/**
+	 * set a function for animation delay calculation
 	 *
-	 * @param f
+	 * @param function
+	 *      delayFunction : ( row , column , currentTile , totalTiles , delayTime ) => ( row , column , currentTile , totalTiles , delayTime )
 	 */
 	set delayFunction ( f )
 	{
 		this._delayFunction = f;
 	}
 	/**
+	 * get html image element
 	 *
 	 * @returns {HTMLImageElement|*}
 	 */
@@ -76,6 +81,7 @@ export class CubeImage extends CubeBase
 		return this._image;
 	}
 	/**
+	 * is loaded getter
 	 *
 	 * @returns {boolean}
 	 */
@@ -84,7 +90,7 @@ export class CubeImage extends CubeBase
 		return this._isLoaded;
 	}
 	/**
-	 *
+	 * load an image ( PNG / JPG / GIF )
 	 * @param url
 	 */
 	loadImage( url )
@@ -93,6 +99,7 @@ export class CubeImage extends CubeBase
 		this._image.src = url;
 	}
 	/**
+	 * get the bitmapdata of loaded image
 	 *
 	 * @returns {null|BitmapData|*}
 	 */
@@ -101,6 +108,7 @@ export class CubeImage extends CubeBase
 		return this._bitmapData;
 	}
 	/**
+	 * get side to which the image has been assigned to
 	 *
 	 * @returns {null|*}
 	 */
@@ -111,11 +119,20 @@ export class CubeImage extends CubeBase
 
 	//---------------------------------------------------------------------------
 
+	/**
+	 * Animation complete event handler
+	 * @private
+	 */
 	_onAnimationComplete()
 	{
 		this.dispatchEvent( new CubeImageEvent( CubeImageEvent.ANIMATION_COMPLETE ) );
 	}
 
+	/**
+	 * image loaded event handler
+	 *
+	 * @private
+	 */
 	_onImageLoaded()
 	{
 		this._isLoaded = true;

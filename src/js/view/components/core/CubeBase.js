@@ -21,6 +21,13 @@ export class CubeBase extends EventDispatcher
 
 	//---------------------------------------------------------------------------
 
+	/**
+	 * Set size / dimensions for a cube collection
+	 * @param row
+	 * @param column
+	 * @param rowCount
+	 * @param columnCount
+	 */
 	setDimensions( row , column , rowCount , columnCount)
 	{
 		this._column = column;
@@ -29,6 +36,7 @@ export class CubeBase extends EventDispatcher
 		this._rowCount= rowCount;
 	}
 	/**
+	 * get start column
 	 *
 	 * @returns {number|*}
 	 */
@@ -37,6 +45,7 @@ export class CubeBase extends EventDispatcher
 		return this._column;
 	}
 	/**
+	 * get number of columns
 	 *
 	 * @returns {number}
 	 */
@@ -45,7 +54,7 @@ export class CubeBase extends EventDispatcher
 		return this._columnCount;
 	}
 	/**
-	 *
+	 * get start row of cube collection
 	 * @returns {number|*}
 	 */
 	get row()
@@ -53,7 +62,7 @@ export class CubeBase extends EventDispatcher
 		return this._row;
 	}
 	/**
-	 *
+	 * get number of rows
 	 * @returns {number}
 	 */
 	get rowCount()
@@ -61,7 +70,7 @@ export class CubeBase extends EventDispatcher
 		return this._rowCount;
 	}
 	/**
-	 *
+	 * Override - addEventListener - because we have custom event registration for mouse event
 	 * @param type
 	 * @param listener
 	 * @param scope
@@ -79,7 +88,7 @@ export class CubeBase extends EventDispatcher
 		super.addEventListener( type , listener , scope );
 	}
 	/**
-	 *
+	 * Override - removeEventListener - because we have custom event registration for mouse event
 	 * @param type
 	 * @param listener
 	 * @param scope
